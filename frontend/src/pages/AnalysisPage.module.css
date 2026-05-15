@@ -1,0 +1,627 @@
+/* ═══════════════════════════════════
+   Analysis Page
+   ═══════════════════════════════════ */
+
+.page {
+  min-height: 100vh;
+  padding-top: 64px;
+  background: #f0f4f8;
+  font-family: 'Inter', sans-serif;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.headerIcon {
+  width: 52px; height: 52px;
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(59,130,246,0.35);
+}
+
+.title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #0a1929;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 0.88rem;
+  color: #6b8aaa;
+  margin: 0.2rem 0 0;
+}
+
+/* ══════════════════════════════════
+   PRE-FLIGHT CARD
+   ══════════════════════════════════ */
+.preflightCard {
+  background: #ffffff;
+  border: 1px solid #e2eaf3;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 24px rgba(30,64,175,0.08);
+  margin-bottom: 1.5rem;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e8f0fb;
+}
+
+.cardIcon { font-size: 2rem; line-height: 1; margin-top: 0.1rem; }
+
+.cardTitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #0a1929;
+  margin: 0 0 0.3rem;
+}
+
+.cardDesc {
+  font-size: 0.83rem;
+  color: #6b8aaa;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ── Form ── */
+.form { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.inputRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.inputGroup { flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
+
+.label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #6b8aaa;
+  text-transform: uppercase;
+}
+
+.inputWrap {
+  display: flex;
+  align-items: center;
+  background: #f5f8fc;
+  border: 1.5px solid #dde6f0;
+  border-radius: 12px;
+  padding: 0 0.9rem;
+  transition: border-color 200ms;
+}
+.inputWrap:focus-within {
+  border-color: #3b82f6;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+}
+
+.inputIcon { color: #9ab0cc; flex-shrink: 0; }
+
+.input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0.8rem 0.6rem;
+  font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+  color: #0a1929;
+  outline: none;
+}
+.input::placeholder { color: #9ab0cc; }
+
+/* quick chips */
+.chips { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+.chip {
+  background: #f0f4f8;
+  border: 1px solid #dde6f0;
+  border-radius: 8px;
+  padding: 0.2rem 0.55rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #2c4a6a;
+  cursor: pointer;
+  transition: background 150ms, border-color 150ms;
+}
+.chip:hover {
+  background: #dbeafe;
+  border-color: #3b82f6;
+  color: #1e40af;
+}
+
+/* swap button */
+.swapBtn {
+  margin-top: 1.9rem;
+  width: 40px; height: 40px;
+  background: #f0f4f8;
+  border: 1.5px solid #dde6f0;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #6b8aaa;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 150ms, color 150ms;
+}
+.swapBtn:hover { background: #dbeafe; color: #1e40af; border-color: #3b82f6; }
+
+/* submit button */
+.submitBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  padding: 0.95rem 2rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: opacity 200ms, transform 150ms;
+  box-shadow: 0 4px 18px rgba(59,130,246,0.3);
+}
+.submitBtn:hover:not(:disabled) { opacity: 0.92; transform: translateY(-1px); }
+.submitBtn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* spinner */
+.spinner {
+  width: 16px; height: 16px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* error */
+.errorBox {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  padding: 0.9rem 1.1rem;
+  color: #dc2626;
+  font-size: 0.85rem;
+}
+
+/* ══════════════════════════════════
+   MFD CLEARANCE PANEL
+   ══════════════════════════════════ */
+.resultWrap {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #dde6f0;
+  animation: fadeUp 0.35s ease;
+}
+@keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
+
+.mfdPanel {
+  background: #f8faff;
+  border: 1.5px solid #c7d8ec;
+  border-left: 5px solid var(--vc);
+  border-radius: 14px;
+  overflow: hidden;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  box-shadow: 0 4px 24px rgba(30,64,175,0.08);
+}
+
+/* header bar */
+.mfdBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #edf3fb;
+  border-bottom: 1px solid #dde6f0;
+  padding: 0.55rem 1.2rem;
+}
+
+.mfdBarLabel {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #6b8aaa;
+  text-transform: uppercase;
+}
+
+.mfdDots { display: flex; gap: 0.4rem; }
+.mfdDot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  transition: background 400ms;
+}
+
+/* route strip */
+.mfdRoute {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid #dde6f0;
+  background: #ffffff;
+}
+
+.mfdApt { display: flex; flex-direction: column; gap: 0.15rem; }
+
+.mfdAptLabel {
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #9ab0cc;
+}
+
+.mfdAptCode {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #0a1929;
+  letter-spacing: 0.06em;
+}
+
+.mfdRouteLine {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mfdLine {
+  flex: 1;
+  height: 1px;
+  background: #c7d8ec;
+}
+
+/* verdict block */
+.mfdVerdict {
+  display: flex;
+  align-items: center;
+  padding: 1.4rem 1.5rem;
+  gap: 1.2rem;
+  border-bottom: 1px solid #dde6f0;
+  background: #ffffff;
+}
+
+.mfdStatusBar {
+  width: 5px;
+  height: 52px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.mfdVerdictText {
+  font-size: 2.4rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* reason */
+.mfdReason {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #dde6f0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  background: #f8faff;
+}
+
+.mfdReasonLabel {
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  color: #1e3a8a;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #bfdbfe, #dbeafe);
+  padding: 0.28rem 0.85rem;
+  border-radius: 999px;
+  border: 1.5px solid #93c5fd;
+  box-shadow: 0 2px 10px rgba(59,130,246,0.25);
+  width: fit-content;
+}
+
+.mfdReasonText {
+  font-size: 0.82rem;
+  color: #2c4a6a;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* footer */
+.mfdFooter {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1.2rem;
+  background: #edf3fb;
+  font-size: 0.52rem;
+  color: #9ab0cc;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-top: 1px solid #dde6f0;
+}
+
+
+
+/* ══════════════════════════════════
+   2-HOUR FORECAST STRIP
+   ══════════════════════════════════ */
+.forecastCard {
+  background: #ffffff;
+  border: 1px solid #e2eaf3;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 24px rgba(30,64,175,0.08);
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.4s ease;
+}
+
+.forecastHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e8f0fb;
+}
+
+.forecastTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0a1929;
+}
+
+.forecastCity {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #6b8aaa;
+  background: #f0f4f8;
+  padding: 0.25rem 0.7rem;
+  border-radius: 8px;
+}
+
+/* horizontal strip of 5 slots */
+.forecastStrip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.75rem;
+}
+
+/* ── Proper bar chart ── */
+.barChart {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+  margin-top: 0.5rem;
+}
+
+/* Y-axis */
+.yAxis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 2px;
+  width: 36px;
+  flex-shrink: 0;
+}
+
+.yLabel {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.5rem;
+  color: #9ab0cc;
+  text-align: right;
+  padding-right: 6px;
+  line-height: 1;
+}
+
+/* chart area with grid lines + bars */
+.chartArea {
+  flex: 1;
+  position: relative;
+  height: 160px;
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  padding: 0 8px;
+  border-left: 1.5px solid #dde6f0;
+  border-bottom: 1.5px solid #dde6f0;
+}
+
+/* horizontal grid lines */
+.gridLine {
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: #f0f4f8;
+  pointer-events: none;
+}
+
+/* one bar + its value label */
+.barGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  gap: 4px;
+  position: relative;
+}
+
+.barTopLabel {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #1e40af;
+  white-space: nowrap;
+}
+
+.bar {
+  width: 100%;
+  max-width: 48px;
+  background: #3b82f6;
+  border-radius: 5px 5px 0 0;
+  transition: height 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+/* X-axis */
+.xAxis {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.xAxisOffset {
+  width: 36px;
+  flex-shrink: 0;
+}
+
+.xLabel {
+  flex: 1;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.52rem;
+  font-weight: 700;
+  color: #6b8aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.fcMetricLabel {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b8aaa;
+  white-space: nowrap;
+}
+
+/* time header cell */
+.fcTimeCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding-bottom: 0.5rem;
+}
+
+/* each bar cell */
+.fcBarCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* horizontal bar */
+.hBarTrack {
+  width: 100%;
+  height: 10px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.hBarFill {
+  height: 100%;
+  background: #3b82f6;
+  border-radius: 999px;
+  transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+  min-width: 2px;
+}
+
+.hBarVal {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #0a1929;
+}
+
+/* time labels */
+.slotLabel {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 900;
+  color: #1e40af;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.slotClock {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.5rem;
+  color: #9ab0cc;
+}
+
+/* alert tags */
+.alertMarker {
+  display: flex;
+  gap: 0.2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.2rem;
+}
+
+.alertTag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.45rem;
+  font-weight: 900;
+  color: white;
+  padding: 0.12rem 0.3rem;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+
+
+/* ── Coming soon ── */
+.comingSoon {
+  background: #ffffff;
+  border: 1.5px dashed #c7d8ec;
+  border-radius: 20px;
+  padding: 2.5rem;
+  text-align: center;
+  color: #9ab0cc;
+}
+
+.csIcon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+
+.comingSoon p {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #6b8aaa;
+  margin: 0 0 0.25rem;
+}
+
+.comingSoon span { font-size: 0.8rem; }

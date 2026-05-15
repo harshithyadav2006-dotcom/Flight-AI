@@ -1,0 +1,344 @@
+/* ═══════════════════════════════════
+   Live Flight Page — Dark + HUD
+   ═══════════════════════════════════ */
+
+.page {
+  position: fixed;
+  inset: 0;
+  padding-top: 64px;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  background: transparent; /* plane photo IS the background */
+  /* 3-column grid: left HUD | center plane | right HUD */
+  display: grid;
+  grid-template-columns: 260px 1fr 260px;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "conn  badge  conn2"
+    "left  plane  right"
+    "axis  axis   axis";
+}
+
+/* ── Connection dot ── */
+.connDot {
+  position: absolute;
+  top: 76px;
+  left: 1.5rem;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  z-index: 200;
+}
+.connOn  { background: #22c55e; box-shadow: 0 0 8px #22c55e; animation: connBlink 2s ease-in-out infinite; }
+.connOff { background: #6b7280; }
+@keyframes connBlink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+/* ── Condition badge — top center ── */
+.condWrap {
+  position: absolute;
+  top: 76px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+}
+
+.condBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1.2rem;
+  border-radius: 9999px;
+  border: 1.5px solid var(--cc);
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(12px);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--cc);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.4);
+  white-space: nowrap;
+  transition: color 350ms ease, border-color 350ms ease;
+}
+.condFlash { animation: condFlash 0.85s ease-in-out infinite; }
+@keyframes condFlash { 0%,100%{opacity:1} 50%{opacity:0.55; box-shadow: 0 0 20px 4px var(--cc);} }
+
+.condDot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  animation: condDotPulse 1.3s ease-in-out infinite;
+}
+@keyframes condDotPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(0.45)} }
+
+/* ══════════════════════════════════
+   PLANE — full-page background photo
+   ══════════════════════════════════ */
+.planeStage {
+  /* Sit behind everything as the full-page background */
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* Remove from grid flow */
+  grid-area: unset;
+}
+
+.planeWrapper {
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+  transform-origin: center center;
+  transform-style: preserve-3d;
+}
+
+.planeImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Subtle dark vignette so HUD panels are readable */
+.planeStage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, rgba(0,0,0,0.35) 0%, transparent 25%, transparent 75%, rgba(0,0,0,0.35) 100%),
+    linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.4) 100%);
+  pointer-events: none;
+}
+
+
+/* ══════════════════════════════════
+   TURBULENCE SHAKE ANIMATIONS
+   Mirrors Arduino LED alert logic:
+   MILD     → slow blink    → subtle drift
+   MODERATE → fast blink    → noticeable shake
+   SEVERE   → solid ON      → violent multi-axis shake + screen flash
+   ══════════════════════════════════ */
+
+/* MILD — gentle slow rocking (like LED slow-blink 500ms) */
+@keyframes shakeMild {
+  0%,100% { transform: perspective(1200px) translate(0px,  0px) rotate(0deg); }
+  20%      { transform: perspective(1200px) translate(-2px, 1px) rotate(-0.4deg); }
+  50%      { transform: perspective(1200px) translate( 2px,-1px) rotate( 0.4deg); }
+  80%      { transform: perspective(1200px) translate(-1px, 2px) rotate(-0.2deg); }
+}
+.shakeMild {
+  animation: shakeMild 1.2s ease-in-out infinite;
+}
+
+/* MODERATE — faster, bigger shake (like LED fast-blink 150ms) */
+@keyframes shakeModerate {
+  0%,100% { transform: perspective(1200px) translate(0px,   0px)  rotate(0deg); }
+  10%     { transform: perspective(1200px) translate(-5px,  2px)  rotate(-1.2deg); }
+  25%     { transform: perspective(1200px) translate( 5px, -3px)  rotate( 1.5deg); }
+  40%     { transform: perspective(1200px) translate(-4px,  4px)  rotate(-0.8deg); }
+  60%     { transform: perspective(1200px) translate( 6px, -2px)  rotate( 1.8deg); }
+  75%     { transform: perspective(1200px) translate(-3px,  3px)  rotate(-1.0deg); }
+  90%     { transform: perspective(1200px) translate( 4px, -4px)  rotate( 0.9deg); }
+}
+.shakeModerate {
+  animation: shakeModerate 0.35s ease-in-out infinite;
+}
+
+/* SEVERE — violent multi-axis chaos (like LED solid ON) */
+@keyframes shakeSevere {
+  0%,100% { transform: perspective(1200px) translate(0px,   0px)  rotateZ(0deg)   rotateX(0deg); }
+  8%      { transform: perspective(1200px) translate(-12px,  6px) rotateZ(-3.5deg) rotateX(2deg); }
+  16%     { transform: perspective(1200px) translate( 14px, -8px) rotateZ( 4.0deg) rotateX(-2.5deg); }
+  24%     { transform: perspective(1200px) translate(-10px,  10px) rotateZ(-2.8deg) rotateX(1.8deg); }
+  32%     { transform: perspective(1200px) translate( 16px, -5px) rotateZ( 5.0deg) rotateX(-3deg); }
+  40%     { transform: perspective(1200px) translate(-14px,  8px) rotateZ(-4.2deg) rotateX(2.2deg); }
+  50%     { transform: perspective(1200px) translate(  8px,  12px) rotateZ( 3.0deg) rotateX(-1.5deg); }
+  60%     { transform: perspective(1200px) translate(-16px, -6px) rotateZ(-5.5deg) rotateX(3.2deg); }
+  70%     { transform: perspective(1200px) translate( 12px, -10px) rotateZ( 4.5deg) rotateX(-2deg); }
+  80%     { transform: perspective(1200px) translate(-8px,   8px) rotateZ(-3.0deg) rotateX(1.5deg); }
+  90%     { transform: perspective(1200px) translate( 10px,  -4px) rotateZ( 3.8deg) rotateX(-2.8deg); }
+}
+.shakeSevere {
+  animation: shakeSevere 0.12s linear infinite;
+}
+
+/* Screen-wide red flash overlay on SEVERE */
+@keyframes severeFlash {
+  0%,100% { opacity: 0; }
+  50%     { opacity: 1; }
+}
+.severeOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(239,68,68,0.18) 0%, transparent 70%);
+  animation: severeFlash 0.25s ease-in-out infinite;
+}
+
+
+/* ══════════════════════════════════
+   HUD PANELS
+   ══════════════════════════════════ */
+.hudPanel {
+  background: rgba(5, 15, 30, 0.65);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 1rem 1.2rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+  color: #e2eaf4;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.hudPanel::before {
+  content: '';
+  position: absolute; top:0; left:0; right:0; height:1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15) 50%, transparent);
+}
+
+.hudTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(180,210,240,0.7);
+  margin-bottom: 0.75rem;
+}
+
+/* Left column */
+.hudLeft {
+  grid-area: left;
+  display: flex;
+  align-items: center;
+  padding: 1rem 0.75rem 5rem 1.5rem;
+}
+
+/* Right column */
+.hudRight {
+  grid-area: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem 5rem 0.75rem;
+}
+
+/* ── Sensor rows ── */
+.sensorGrid { display: flex; flex-direction: column; gap: 0.5rem; width: 100%; }
+
+.sensorRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sensorLabel {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: rgba(180,210,240,0.65);
+}
+
+.sensorVal {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  transition: color 300ms ease;
+}
+
+.sensorValRaw {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: #c8dff0;
+}
+
+.sensorUnit {
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: rgba(180,210,240,0.5);
+}
+
+.divider {
+  height: 1px;
+  background: rgba(30,100,180,0.1);
+  margin: 0.15rem 0;
+}
+
+.motionDesc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: rgba(180,210,240,0.8);
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+/* ══════════════════════════════════
+   BOTTOM AXIS BAR
+   ══════════════════════════════════ */
+.axisBar {
+  grid-area: axis;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0.8rem 2rem 1.2rem;
+  background: rgba(5, 15, 30, 0.7);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 -2px 20px rgba(0,0,0,0.3);
+}
+
+.axisItem { display: flex; align-items: center; gap: 0.7rem; }
+
+.axisLabel {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: rgba(180,210,240,0.65);
+  width: 42px;
+}
+
+.axisMeter {
+  width: 110px;
+  height: 5px;
+  background: rgba(30,100,180,0.1);
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+}
+
+.axisCenter {
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  width: 1px;
+  background: rgba(30,100,180,0.25);
+}
+
+.axisFill {
+  position: absolute;
+  top: 0; bottom: 0;
+  border-radius: 2px;
+  transition: width 0.15s ease, left 0.15s ease;
+  opacity: 0.9;
+}
+
+.axisVal {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: #d0e8f8;
+  width: 50px;
+  text-align: right;
+}

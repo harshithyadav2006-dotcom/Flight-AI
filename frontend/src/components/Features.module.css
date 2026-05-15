@@ -1,0 +1,267 @@
+.section {
+  padding: var(--sp-24) 0 var(--sp-20);
+  position: relative;
+  background: linear-gradient(180deg, #e8f4fd 0%, #f0f6fc 100%);
+  overflow: hidden;
+}
+
+/* Subtle sky radial glow at top */
+.section::before {
+  content: '';
+  position: absolute;
+  top: -120px; left: 50%;
+  transform: translateX(-50%);
+  width: 900px; height: 400px;
+  background: radial-gradient(ellipse, rgba(26,124,193,0.09) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--sp-6);
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Section Header ── */
+.header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto var(--sp-16);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);
+  animation: fadeInUp 0.7s ease both;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 16px;
+  background: rgba(26,124,193,0.07);
+  border: 1px solid rgba(26,124,193,0.2);
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.badgeDot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--color-text-primary);
+}
+
+.subheading {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  line-height: 1.75;
+}
+
+/* ── Card Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+/* ══════════════════════════════
+   GLASS CARD
+   ══════════════════════════════ */
+.card {
+  position: relative;
+  padding: 1.75rem;
+  /* Frosted glass base */
+  background: rgba(255, 255, 255, 0.58);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: hidden;
+  cursor: pointer;
+  /* Smooth transitions for hover + touch */
+  transition:
+    transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 280ms ease,
+    border-color 280ms ease,
+    background 280ms ease;
+  box-shadow:
+    0 4px 24px rgba(30, 100, 180, 0.08),
+    0 1px 0 rgba(255,255,255,0.9) inset,
+    0 -1px 0 rgba(30,100,180,0.06) inset;
+  /* Staggered entrance */
+  animation: cardEntrance 0.6s ease both;
+  will-change: transform;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Entrance stagger per card */
+.card:nth-child(1) { animation-delay: 0.05s; }
+.card:nth-child(2) { animation-delay: 0.12s; }
+.card:nth-child(3) { animation-delay: 0.19s; }
+.card:nth-child(4) { animation-delay: 0.26s; }
+.card:nth-child(5) { animation-delay: 0.33s; }
+.card:nth-child(6) { animation-delay: 0.40s; }
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Inner shimmer line at top */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.95) 50%, transparent 100%);
+}
+
+/* Subtle color tint that matches the card's accent (via CSS var) */
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(ellipse 70% 50% at 50% 0%, var(--card-tint, rgba(26,124,193,0.04)) 0%, transparent 70%);
+  pointer-events: none;
+  transition: opacity 300ms ease;
+  opacity: 0;
+}
+
+/* ── Hover state ── */
+.card:hover {
+  transform: translateY(-6px) scale(1.015);
+  background: rgba(255, 255, 255, 0.78);
+  border-color: rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 20px 50px rgba(30, 100, 180, 0.15),
+    0 6px 20px rgba(30, 100, 180, 0.08),
+    0 1px 0 rgba(255,255,255,1) inset;
+}
+
+.card:hover::after { opacity: 1; }
+
+/* ── Touch / Active press state ── */
+.card:active {
+  transform: translateY(-2px) scale(0.985);
+  transition:
+    transform 100ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 100ms ease;
+  box-shadow:
+    0 6px 18px rgba(30, 100, 180, 0.12),
+    0 1px 0 rgba(255,255,255,0.9) inset;
+}
+
+/* ── Card Top Row ── */
+.cardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+/* Icon box — glass within glass */
+.iconWrap {
+  width: 46px; height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.65);
+  border: 1px solid rgba(255,255,255,0.8);
+  border-radius: 12px;
+  flex-shrink: 0;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 1px 0 rgba(255,255,255,1) inset;
+  transition: transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 280ms ease;
+}
+
+.card:hover .iconWrap {
+  transform: scale(1.12) rotate(-4deg);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1), 0 1px 0 rgba(255,255,255,1) inset;
+}
+
+/* Tag pill */
+.tag {
+  font-size: 0.67rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(4px);
+  flex-shrink: 0;
+}
+
+/* ── Text ── */
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.cardDesc {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  flex: 1;
+}
+
+/* ── Bottom gradient bar (shows on hover) ── */
+.cardFooter { margin-top: auto; }
+
+.cardLine {
+  height: 2px;
+  border-radius: 2px;
+  opacity: 0;
+  transform: scaleX(0.3);
+  transform-origin: left;
+  transition: opacity 350ms ease, transform 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.card:hover .cardLine {
+  opacity: 0.7;
+  transform: scaleX(1);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px)  {
+  .grid { grid-template-columns: 1fr; gap: 1rem; }
+  .section { padding: var(--sp-16) 0; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

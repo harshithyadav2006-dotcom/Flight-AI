@@ -1,0 +1,279 @@
+/* ═════════════════════════════════
+   Engine Status Panel
+   ═════════════════════════════════ */
+
+.panel {
+  background: rgba(10, 25, 55, 0.80);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 1.2rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  grid-column: 1 / -1;    /* spans full width in dashboard grid */
+}
+
+/* top shine */
+.panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18) 50%, transparent);
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.55);
+}
+
+.icingAlert {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #60c8ff;
+  text-transform: uppercase;
+  animation: icingBlink 1.2s ease-in-out infinite;
+}
+
+.icingDot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #60c8ff;
+  box-shadow: 0 0 8px #60c8ff;
+}
+
+@keyframes icingBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 50%, transparent);
+}
+
+/* ── Engines row ── */
+.enginesRow {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.separator {
+  width: 1px;
+  background: rgba(255,255,255,0.07);
+  margin: 0 1.5rem;
+  flex-shrink: 0;
+}
+
+/* ── Single engine block ── */
+.engine {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  transition: opacity 200ms ease;
+}
+
+.engineFlash {
+  animation: enginePulse 0.7s ease-out;
+}
+
+@keyframes enginePulse {
+  0%   { opacity: 1; transform: scale(1); }
+  30%  { opacity: 0.6; transform: scale(0.98); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.engineLabel {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+}
+
+/* ── RPM section ── */
+.rpmSection {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.rpmBarTrack {
+  width: 28px;
+  height: 100px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: flex-end;
+}
+
+.rpmBarFill {
+  width: 100%;
+  border-radius: 4px;
+  transition: height 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.rpmTick {
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: rgba(255,255,255,0.12);
+  pointer-events: none;
+}
+
+.rpmValues {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.n1Val {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  transition: color 400ms ease;
+}
+
+.n1Unit {
+  font-size: 0.75rem;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+.rpmVal {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.45);
+}
+
+.rpmUnit {
+  font-size: 0.58rem;
+  opacity: 0.7;
+}
+
+/* ── Status badge ── */
+.statusBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.32rem 0.9rem;
+  border-radius: 9999px;
+  border: 1.5px solid;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(0,0,0,0.35);
+  white-space: nowrap;
+  transition: color 400ms ease, border-color 400ms ease, box-shadow 400ms ease;
+  box-shadow: 0 0 10px var(--status-glow);
+  text-shadow: 0 0 8px var(--status-color);
+}
+
+.badgePulse {
+  animation: badgePop 0.6s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+@keyframes badgePop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.12); }
+  70%  { transform: scale(0.96); }
+  100% { transform: scale(1); }
+}
+
+.statusDot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: dotBlink 1.4s ease-in-out infinite;
+}
+
+@keyframes dotBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* ── Icing risk section ── */
+.icingSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding-top: 0.25rem;
+}
+
+.icingLabel {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.45);
+  transition: color 400ms ease;
+}
+
+.icingTrack {
+  height: 6px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 3px;
+  overflow: visible;
+  position: relative;
+}
+
+.icingFill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1s ease, background 600ms ease;
+}
+
+/* threshold marker at 45% */
+.icingThreshold {
+  position: absolute;
+  top: -3px;
+  left: 45%;
+  width: 2px;
+  height: 12px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 1px;
+}
+
+.icingNote {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.5rem;
+  color: rgba(255,255,255,0.25);
+  text-align: right;
+}

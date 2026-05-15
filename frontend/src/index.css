@@ -1,0 +1,144 @@
+/* =============================================
+   SkyPilot AI – Light Theme Design System
+   Matches the sky-blue / cloud-white hero photo
+   ============================================= */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+:root {
+  /* Backgrounds */
+  --color-bg:           #f0f6fc;
+  --color-bg-alt:       #e6f0f9;
+  --color-surface:      #ffffff;
+  --color-surface-2:    #f5f9ff;
+  --color-surface-3:    #eaf3fb;
+
+  /* Borders */
+  --color-border:       rgba(30, 100, 180, 0.1);
+  --color-border-glow:  rgba(30, 120, 200, 0.25);
+
+  /* Brand / Sky Blue */
+  --color-primary:      #1a7cc1;
+  --color-primary-dim:  #155e9e;
+  --color-primary-dark: #0e4a80;
+  --color-accent:       #2e8bc0;
+  --color-accent-2:     #17a589;
+  --color-danger:       #e05252;
+  --color-warning:      #d4a017;
+
+  /* Text */
+  --color-text-primary:   #0a1929;
+  --color-text-secondary: #2c4a6a;
+  --color-text-muted:     #6b8aaa;
+
+  /* Gradients */
+  --grad-primary: linear-gradient(135deg, #1a7cc1 0%, #2e8bc0 100%);
+  --grad-hero:    radial-gradient(ellipse 80% 60% at 50% -20%, rgba(30, 120, 200, 0.15) 0%, transparent 70%);
+  --grad-card:    linear-gradient(145deg, #ffffff 0%, #f5f9ff 100%);
+
+  /* Fonts */
+  --font-display: 'Outfit', sans-serif;
+  --font-body:    'Inter', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.25rem;
+  --sp-6: 1.5rem;
+  --sp-8: 2rem;
+  --sp-10: 2.5rem;
+  --sp-12: 3rem;
+  --sp-16: 4rem;
+  --sp-20: 5rem;
+  --sp-24: 6rem;
+
+  /* Radius */
+  --radius-sm:   0.375rem;
+  --radius-md:   0.75rem;
+  --radius-lg:   1rem;
+  --radius-xl:   1.5rem;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast:   150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow:   500ms ease;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #e6f0f9; }
+::-webkit-scrollbar-thumb { background: #a8c8e8; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #1a7cc1; }
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--sp-6);
+}
+
+/* Animations */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.6; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes data-stream {
+  0%   { transform: scaleY(0.3); opacity: 0.3; }
+  50%  { transform: scaleY(1);   opacity: 1; }
+  100% { transform: scaleY(0.3); opacity: 0.3; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes scan-line {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(400%); opacity: 0; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}

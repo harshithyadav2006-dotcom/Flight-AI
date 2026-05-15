@@ -1,0 +1,244 @@
+/* ═══════════════════════════════════
+   Dashboard Page — Compact Glass
+   ═══════════════════════════════════ */
+
+.page {
+  min-height: 100vh;
+  padding-top: 64px;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ── Clouds-only background ── */
+.page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url('/dash-bg.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+/* Overlay — readable over clouds */
+.page::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 22, 48, 0.18);
+  z-index: 1;
+}
+
+
+
+/* ── Main content ── */
+.main {
+  position: relative;
+  z-index: 10;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.1rem 1.5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+/* ── Stats row — compact ── */
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.75rem;
+}
+
+.statCard {
+  background: rgba(10, 25, 55, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 1px 0 rgba(255,255,255,0.06) inset;
+  transition: transform 240ms cubic-bezier(0.34,1.56,0.64,1), box-shadow 240ms ease, border-color 200ms ease;
+}
+
+.statCard:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255,255,255,0.22);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.38);
+}
+
+.statLabel {
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.6);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.statVal {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.2);
+}
+
+.statUnit {
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.55);
+}
+
+.statSpark { margin-top: 0.2rem; opacity: 0.8; }
+
+/* ── Panels grid — 3 equal cols ── */
+.panelsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+/* ── Base solid-glass panel ── */
+.panel {
+  background: rgba(10, 25, 55, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 1px 0 rgba(255,255,255,0.06) inset;
+  transition: transform 240ms cubic-bezier(0.34,1.56,0.64,1), box-shadow 240ms ease, border-color 200ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2) 50%, transparent);
+}
+
+.panel:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,0.18);
+  box-shadow: 0 20px 48px rgba(0,0,0,0.45);
+}
+
+.panelTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.55);
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Wind panel ── */
+.windLayout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.windNumbers { display: flex; flex-direction: column; gap: 0.4rem; flex: 1; }
+
+.bigVal {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.2);
+}
+
+.unit { font-size: 0.78rem; font-weight: 400; color: rgba(255,255,255,0.5); }
+
+.windMeta { display: flex; gap: 0.75rem; font-size: 0.72rem; color: rgba(255,255,255,0.55); }
+.windMeta strong { color: rgba(255,255,255,0.88); }
+
+/* ── Atmosphere ── */
+.atmoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+  position: relative;
+  z-index: 1;
+}
+
+.atmoItem { display: flex; flex-direction: column; gap: 0.15rem; }
+
+.atmoLabel {
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.5);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+}
+
+.atmoVal {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.18);
+}
+
+/* ── Engine gauges ── */
+.engineList { display: flex; flex-direction: column; gap: 0.6rem; position: relative; z-index: 1; }
+
+.engineRow {
+  display: grid;
+  grid-template-columns: 80px 1fr 40px;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.engineLabel {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.55);
+}
+
+.engineVal {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-align: right;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+.gaugeBar { height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
+
+.gaugeFill { height: 100%; border-radius: 3px; transition: width 1s ease; }
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .statsRow   { grid-template-columns: repeat(3, 1fr); }
+  .panelsGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 700px) {
+  .statsRow   { grid-template-columns: repeat(2, 1fr); }
+  .panelsGrid { grid-template-columns: 1fr; }
+  .main       { padding: 1rem; }
+}

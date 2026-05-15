@@ -1,0 +1,135 @@
+/* ═══════════════════════════════════
+   Navbar
+   ═══════════════════════════════════ */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transition: background 350ms ease, backdrop-filter 350ms ease, box-shadow 350ms ease;
+}
+
+/* ── State: at the very top (over hero) ── */
+.atTop {
+  background: transparent;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+
+/* ── State: scrolled past hero ── */
+.scrolled {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  box-shadow: 0 1px 0 rgba(30, 100, 180, 0.1), 0 4px 24px rgba(30, 100, 180, 0.07);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  padding: 1.1rem 2rem;
+  max-width: 100%;
+  position: relative;
+}
+
+/* ── Logo ── */
+.logo {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  flex-shrink: 0;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+  transition: color 350ms ease, text-shadow 350ms ease;
+}
+
+.logoDark {
+  color: #0a1929;
+  text-shadow: none;
+}
+
+/* ── Nav list – absolutely centered ── */
+.navList {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  list-style: none;
+  gap: 0.15rem;
+  align-items: center;
+}
+
+.navItem {
+  padding: 0.4rem 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.92);
+  border-radius: 8px;
+  transition: color 200ms ease, background 200ms ease;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.25);
+  white-space: nowrap;
+}
+
+.navItem:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Dark mode (scrolled) */
+.navItemDark {
+  color: #2c4a6a;
+  text-shadow: none;
+}
+
+.navItemDark:hover {
+  color: #1a7cc1;
+  background: rgba(26, 124, 193, 0.07);
+}
+
+.navItemActive {
+  font-weight: 600;
+}
+
+/* ── User avatar button ── */
+.userBtn {
+  margin-left: auto;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 200ms ease, border-color 200ms ease, color 200ms ease;
+  backdrop-filter: blur(4px);
+  flex-shrink: 0;
+}
+
+.userBtn:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.userBtnDark {
+  background: rgba(26, 124, 193, 0.08);
+  border-color: rgba(26, 124, 193, 0.25);
+  color: #1a7cc1;
+}
+
+.userBtnDark:hover {
+  background: rgba(26, 124, 193, 0.15);
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .navList { display: none; }
+  .inner { padding: 1rem 1.25rem; }
+}

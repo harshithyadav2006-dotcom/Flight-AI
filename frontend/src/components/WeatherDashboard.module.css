@@ -1,0 +1,450 @@
+.section {
+  padding: var(--sp-24) 0;
+  position: relative;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(56,189,248,0.15), transparent);
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--sp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-10);
+}
+
+/* ── Header ── */
+.header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-1) var(--sp-4);
+  background: rgba(56,189,248,0.08);
+  border: 1px solid rgba(56,189,248,0.2);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.badgeDot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  animation: pulse-glow 2s infinite;
+  flex-shrink: 0;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+}
+
+.accent {
+  background: linear-gradient(135deg, #38BDF8, #818CF8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subheading {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  max-width: 580px;
+}
+
+/* ── Safety Banner ── */
+.safetyBanner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-4) var(--sp-6);
+  border: 1px solid;
+  border-radius: var(--radius-lg);
+  flex-wrap: wrap;
+}
+
+.safetyDot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.safetyLabel {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+}
+
+.safetyDesc {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  flex: 1;
+}
+
+.safetyTime {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  margin-left: auto;
+}
+
+/* ── Main Grid ── */
+.mainGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-5);
+}
+
+/* ── Card ── */
+.card {
+  background: linear-gradient(145deg, rgba(15,30,56,0.9), rgba(11,22,41,0.7));
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--sp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  transition: border-color var(--transition-normal), transform var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(56,189,248,0.2), transparent);
+}
+
+.card:hover {
+  border-color: rgba(56,189,248,0.25);
+  transform: translateY(-3px);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.cardIcon {
+  width: 40px; height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  border: 1px solid;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.cardTitle {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+/* ── Big Value ── */
+.bigValue {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.unit {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  letter-spacing: 0;
+}
+
+/* ── Sub Row ── */
+.subRow {
+  display: flex;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+}
+
+.subItem {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.subItem strong {
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+/* ── Sparkline ── */
+.sparkRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.sparkline {
+  display: block;
+}
+
+.sparkLabel {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── Wind Layout ── */
+.windLayout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+}
+
+.windNumbers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  flex: 1;
+}
+
+/* ── Compass ── */
+.compass {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-1);
+  flex-shrink: 0;
+}
+
+.compassDeg {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}
+
+/* ── Humidity Gauge ── */
+.gaugeWrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.gauge {
+  position: relative;
+  height: 8px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.gaugeFill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1s ease;
+}
+
+.gaugeMarker {
+  position: absolute;
+  top: -2px;
+  width: 4px; height: 12px;
+  background: white;
+  border-radius: 2px;
+  transform: translateX(-50%);
+  transition: left 1s ease;
+  box-shadow: 0 0 6px rgba(255,255,255,0.5);
+}
+
+.gaugeLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.6rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── Rain Visualizer ── */
+.rainViz {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 50px;
+  padding: var(--sp-2) 0;
+}
+
+.rainBar {
+  flex: 1;
+  background: linear-gradient(180deg, #60A5FA, rgba(96,165,250,0.2));
+  border-radius: 2px;
+  animation: data-stream 2s ease-in-out infinite;
+}
+
+/* ── Hazard List ── */
+.hazardList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.hazardItem {
+  display: grid;
+  grid-template-columns: 100px 1fr 50px;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.hazardName {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+}
+
+.hazardBar {
+  height: 5px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.hazardFill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1s ease;
+}
+
+.hazardVal {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-align: right;
+  color: var(--color-text-secondary);
+}
+
+/* ── Route Section ── */
+.routeSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.routeTitle {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.routeGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-4);
+}
+
+.routeCard {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-5);
+  background: var(--color-surface-2);
+  border-radius: var(--radius-lg);
+  border: 1px solid;
+  transition: transform var(--transition-fast);
+}
+
+.routeCard:hover { transform: translateY(-2px); }
+
+.route-ok     { border-color: rgba(52,211,153,0.2); }
+.route-warn   { border-color: rgba(251,191,36,0.2); }
+.route-info   { border-color: rgba(56,189,248,0.2); }
+.route-danger { border-color: rgba(248,113,113,0.2); }
+
+.routeIcon { font-size: 1.5rem; flex-shrink: 0; }
+
+.routeInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.routeLocation {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.routeCondition {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.routeBadge {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+}
+
+.badge-ok     { background: rgba(52,211,153,0.12); color: #34D399; }
+.badge-warn   { background: rgba(251,191,36,0.12);  color: #FBBF24; }
+.badge-info   { background: rgba(56,189,248,0.12);  color: #38BDF8; }
+.badge-danger { background: rgba(248,113,113,0.12); color: #F87171; }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .mainGrid { grid-template-columns: repeat(2, 1fr); }
+  .routeGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .mainGrid { grid-template-columns: 1fr; }
+  .routeGrid { grid-template-columns: 1fr; }
+  .hazardItem { grid-template-columns: 80px 1fr 44px; }
+}

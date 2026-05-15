@@ -1,0 +1,387 @@
+.section {
+  padding: var(--sp-24) 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(7, 16, 32, 0.5) 50%, transparent 100%);
+  position: relative;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--sp-6);
+}
+
+/* Header */
+.header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto var(--sp-12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-1) var(--sp-4);
+  background: rgba(52, 211, 153, 0.08);
+  border: 1px solid rgba(52, 211, 153, 0.2);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-accent-2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+}
+
+.headingAccent {
+  background: linear-gradient(135deg, #34D399, #38BDF8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subheading {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+/* Dashboard Frame */
+.dashboardFrame {
+  background: rgba(7, 16, 32, 0.95);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(56, 189, 248, 0.05);
+}
+
+/* Top Bar */
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-3) var(--sp-6);
+  background: rgba(11, 22, 41, 0.8);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.topBarLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.liveDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent-2);
+  box-shadow: 0 0 8px var(--color-accent-2);
+  animation: pulse-glow 2s infinite;
+  flex-shrink: 0;
+}
+
+.liveLabel {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-accent-2);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.topBarTitle {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.topBarRight {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+.time {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.topBarBadge {
+  padding: 2px var(--sp-3);
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+/* Dashboard Grid */
+.dashGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  background: var(--color-border);
+  min-height: 380px;
+}
+
+/* Panels */
+.panel {
+  background: var(--color-surface);
+  padding: var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.panelTitle {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+.panelCount {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  background: rgba(56, 189, 248, 0.1);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.alertDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #FBBF24;
+  box-shadow: 0 0 8px #FBBF24;
+  animation: pulse-glow 1.5s infinite;
+}
+
+/* Flight List */
+.flightList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.flightItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding: var(--sp-3);
+  background: var(--color-surface-2);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  transition: border-color var(--transition-fast);
+}
+
+.flightItem:hover {
+  border-color: var(--color-border);
+}
+
+.flightTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flightId {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.flightStatus {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.status-ok      { background: rgba(52, 211, 153, 0.12); color: #34D399; }
+.status-warning { background: rgba(251, 191, 36, 0.12);  color: #FBBF24; }
+.status-info    { background: rgba(56, 189, 248, 0.12);  color: #38BDF8; }
+.status-danger  { background: rgba(248, 113, 113, 0.12); color: #F87171; }
+
+.flightRoute {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.airport {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+
+.progressBar {
+  position: relative;
+  height: 4px;
+  background: rgba(56, 189, 248, 0.1);
+  border-radius: 2px;
+  overflow: visible;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--grad-primary);
+  border-radius: 2px;
+  transition: width 1s ease;
+}
+
+.progressLabel {
+  position: absolute;
+  right: 0;
+  top: -16px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--color-text-muted);
+}
+
+/* Metrics Column */
+.metricsCol {
+  background: var(--color-surface);
+  padding: var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.metricCard {
+  padding: var(--sp-4);
+  background: var(--color-surface-2);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  border: 1px solid var(--color-border);
+}
+
+.metricLabel {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.metricValue {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.metricUnit {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.metricBar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.metricBarFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1s ease;
+}
+
+/* Alerts */
+.alertList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.alertItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  padding: var(--sp-3);
+  border-radius: var(--radius-md);
+  border-left: 2px solid;
+}
+
+.alertWarning { background: rgba(251, 191, 36, 0.06);  border-color: #FBBF24; }
+.alertInfo    { background: rgba(56, 189, 248, 0.06);   border-color: #38BDF8; }
+.alertOk      { background: rgba(52, 211, 153, 0.06);   border-color: #34D399; }
+.alertDanger  { background: rgba(248, 113, 113, 0.06);  border-color: #F87171; }
+
+.alertIcon {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+.alertWarning .alertIcon { color: #FBBF24; background: rgba(251, 191, 36, 0.15); }
+.alertInfo    .alertIcon { color: #38BDF8; background: rgba(56, 189, 248, 0.15); }
+.alertOk      .alertIcon { color: #34D399; background: rgba(52, 211, 153, 0.15); }
+.alertDanger  .alertIcon { color: #F87171; background: rgba(248, 113, 113, 0.15); }
+
+.alertContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.alertTitle {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.alertTime {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .dashGrid { grid-template-columns: 1fr; }
+}
